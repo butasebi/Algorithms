@@ -5,7 +5,7 @@
 //ATTENTION! Always use sa_init() to reset/initiate the string automaton
 // sa_extend(CHAR) to append the character CHAR at the end of the string
 // sa_extend_string(STRING)  to append the string STRING at the end of the string
-//check_occ(STRING) checks if STRING is a substring of the big string
+//check_occ(STRING) checks if STRING is a substring of the big string (which is currently saved in the st vector)
 //nr_subs(STRING) checks the number of different substrings of STRING
 //sum_len_subs(STRING) checks the sum of lengths of all substrings of STRING
 // kth_subs(STRING, k) finds the k-th substring of the string STRING (k = 0 => empty string)
@@ -30,7 +30,7 @@ struct state {
     bool is_clone = false;
     vector <int> inverse_link;
 };
-const int MAXLEN = 1000000;
+const int MAXLEN = 250000;
 state st[MAXLEN * 2];
 int divine_cnt[MAXLEN * 2], cnt[MAXLEN * 2];
 vector <int> all_occs;
@@ -337,14 +337,11 @@ string lcs (string A, string B)
 
 void read()
 {
-//    string alfa = "alabalaportocalabbbbbb";
-//    cout << lcs(alfa, "d");
+
 }
 void solve()
 {
-    string A, B;
-    cin >> A >> B;
-   cout << nr_occurrences(A, B);
+
 }
 void write()
 {
