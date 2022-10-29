@@ -12,7 +12,7 @@
 //smallest_cyclic_shift(STRING) find the smallest cyclic shift of the string
 //nr_occurrences(STRING, STRING2) returns the number of occurrences of STRING2 in STRING
 //first_occurrence(STRING, STRING2) returns the first occurrence of STRING2 in STRING (returns the position where STRING2 begins (considering STRING indexed by 1))
-//all_occurrences(STRING, STRING2) returns all the possition where STRING2 occurs in STRING as a vector<int> list, if no occurrence returns empty list (returns the position where STRING2 begins (considering STRING indexed by 1))
+//all_occurrences(STRING, STRING2) returns all the position where STRING2 occurs in STRING as a vector<int> list, if no occurrence returns empty list (returns the position where STRING2 begins (considering STRING indexed by 1))
 //lcs(STRING, STRING2) returns the longest common substring between STRING and STRING2
 //EVERYTHING FUNCTION FROM ABOVE IS DONE IN O(length(STRING))
 #include<bits/stdc++.h>
