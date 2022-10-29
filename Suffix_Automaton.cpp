@@ -30,7 +30,7 @@ struct state {
     bool is_clone = false;
     vector <int> inverse_link;
 };
-const int MAXLEN = 100000;
+const int MAXLEN = 1000000;
 state st[MAXLEN * 2];
 int divine_cnt[MAXLEN * 2], cnt[MAXLEN * 2];
 vector <int> all_occs;
@@ -65,6 +65,8 @@ void sa_extend(char c)
             st[clone].len = st[p].len + 1;
             st[clone].next = st[q].next;
             st[clone].link = st[q].link;
+            st[clone].is_clone = true;
+
             while (p != -1 && st[p].next[c] == q) {
                 st[p].next[c] = clone;
                 p = st[p].link;
@@ -340,6 +342,9 @@ void read()
 }
 void solve()
 {
+    string A, B;
+    cin >> A >> B;
+   cout << nr_occurrences(A, B);
 }
 void write()
 {
