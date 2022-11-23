@@ -41,6 +41,8 @@ void sa_init()
     st[0].link = -1;
     sz++;
     last = 0;
+    st[0].next.clear();
+    st[0].inverse_link.clear();
 }
 void sa_extend(char c)
 {
