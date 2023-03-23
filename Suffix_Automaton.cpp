@@ -6,6 +6,8 @@
 // sa_extend(CHAR) to append the character CHAR at the end of the string
 // sa_extend_string(STRING)  to append the string STRING at the end of the string
 //check_occ(STRING) checks if STRING is a substring of the big string (which is currently saved in the st vector)
+//biggest_substring() returns the lexicographically biggest substring from the big string (which is currently saved in the st vector)
+//biggest_substring_smaller(STRING) returns the lexicographically biggest substring smaller than STRING from the big string (which is currently saved in the st vector)
 //nr_subs(STRING) checks the number of different substrings of STRING
 //sum_len_subs(STRING) checks the sum of lengths of all substrings of STRING
 // kth_subs(STRING, k) finds the k-th substring of the string STRING (k = 0 => empty string)
@@ -93,6 +95,70 @@ bool check_occ(string A)
             return false;
 
     return true;
+}
+string biggest_substring_smaller(string A)
+{
+    int current_state = 0;
+    string cur;
+
+    int saiz_A = A.size();
+    for(int i = 0; i >= 0; i ++)
+    {
+        bool ok = false;
+
+        if(i < saiz_A)
+        {
+            for (char s = A[i]; s >= 'A'; s--)
+                if (st[current_state].next.count(s)) {
+                    cur.push_back(s);
+                    current_state = st[current_state].next[s];
+                    ok = true;
+                    break;
+                }
+        }
+        else if(i == saiz_A && cur == A)
+        {
+            break;
+        }
+        else
+            for(char s = 'Z'; s >= 'A'; s --)
+                if(st[current_state].next.count(s))
+                {
+                    cur.push_back(s);
+                    current_state = st[current_state].next[s];
+                    ok = true;
+                    break;
+                }
+
+        if(!ok)
+            break;
+    }
+
+    return cur;
+}
+string biggest_substring()
+{
+    int current_state = 0;
+    string cur;
+
+    for(int i = 0; i >= 0; i ++)
+    {
+        bool ok = false;
+
+        for(char s = 'Z'; s >= 'A'; s --)
+            if(st[current_state].next.count(s))
+            {
+                cur.push_back(s);
+                current_state = st[current_state].next[s];
+                ok = true;
+                break;
+            }
+
+        if(!ok)
+            break;
+    }
+
+    return cur;
 }
 int dp[MAXLEN * 2], ans[MAXLEN * 2];
 bool seen[MAXLEN * 2];
@@ -336,7 +402,6 @@ string lcs (string A, string B)
     }
     return B.substr(poz_maxx - maxx + 1, maxx);
 }
-
 void read()
 {
 
