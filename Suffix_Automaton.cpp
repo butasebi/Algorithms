@@ -100,27 +100,33 @@ string biggest_substring_smaller(string A)
 {
     int current_state = 0;
     string cur;
+    bool still_looking_for_identity = true;
 
     int saiz_A = A.size();
-    for(int i = 0; i >= 0; i ++)
+    for(int i = 0; i < saiz_A || !still_looking_for_identity; i ++)
     {
         bool ok = false;
 
-        if(i < saiz_A)
+        if(still_looking_for_identity && st[current_state].next.count(A[i]))
+        {
+            cur.push_back(A[i]);
+            current_state = st[current_state].next[A[i]];
+            ok = true;
+        }
+        else if(still_looking_for_identity)
         {
             for (char s = A[i]; s >= 'A'; s--)
-                if (st[current_state].next.count(s)) {
+                if (st[current_state].next.count(s))
+                {
                     cur.push_back(s);
                     current_state = st[current_state].next[s];
                     ok = true;
                     break;
                 }
-        }
-        else if(i == saiz_A && cur == A)
-        {
-            break;
+            still_looking_for_identity = false;
         }
         else
+        {
             for(char s = 'Z'; s >= 'A'; s --)
                 if(st[current_state].next.count(s))
                 {
@@ -129,6 +135,7 @@ string biggest_substring_smaller(string A)
                     ok = true;
                     break;
                 }
+        }
 
         if(!ok)
             break;
